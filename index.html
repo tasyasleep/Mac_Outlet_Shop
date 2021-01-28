@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/slick/slick-theme.css">
+    <link rel="stylesheet" media="all" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>MacOutlet</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="#"><img src="img/icons/logo.svg" alt="cart" class="logo_img"></a>
+                </div>
+                <div class="basket">
+                    <a href="#"><img src="img/icons/basket.svg" alt="cart" class="basket_img">
+                    </a>
+                </div>
+                <span>
+                    <p>3</p>
+                </span>
+            </div>
+
+        </header>
+
+        <main id="main">
+            <div class="slider">
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/ipad_air_banner.jpg)">
+                        <div class="slider-text">
+                            <h1>IPad Air</h1>
+                            <button disabled type="button" class="slider-btn">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/airpods_pro_banner.png)"></div>
+                    <div class="slider-text">
+                        <h1>AirPods Pro</h1>
+                        <button type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/watch_banner.jpg)"></div>
+                    <div class="slider-text">
+                        <h1>Apple Watch 4</h1>
+                        <button type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/iphone_12_banner.jpg)"></div>
+                    <div class="slider-text">
+                        <button type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/mac_book_banner.jpg)"></div>
+                    <div class="slider-text">
+                        <h1>MacBook Pro 16</h1>
+                        <button type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/apple_tv_banner.png)"></div>
+                    <div class="slider-text">
+                        <h1>Apple TV</h1>
+                        <button type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+                <div class="slide-holder">
+                    <div class="slide" style="background-image: url(img/banners/air_pods_max_banner.jpg)"></div>
+                    <div class="slider-text">
+                        <h1>AirPods Max</h1>
+                        <button type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Enter device name..." class="deviceInp" style="background-image: url(img/icons/search.svg)">
+                <div class="img-filter">
+                    <img src="img/icons/filter.svg" alt="Image">
+                </div>
+                <div class="img-sort">
+                    <img src="img/icons/Sort.svg" alt="Image">
+                </div>
+            </div>
+            <div class="container">
+                <div class="list_device">
+                    <div class="card">
+                        <div class="device">
+                            <div class="device_like">
+                                <img src="img/icons/like_empty.svg" alt="cart" class="like_empty">
+                            </div>
+                            <div class="device_img" style="background-image: url(img/items/apple-tv.jpeg)"></div>
+                            <div class="device_info">
+                                <h3 class="card_title">Apple TV Gen. 4</h3>
+                                <p><img src="img/icons/check 1.svg" alt="cart" class="check">left in stock</p>
+                                <p class="card_price">Price :</p>
+                                <button class="card_btn">Add to cart</button>
+                            </div>
+                            <div class="card_reviews">
+                                <p><img src="img/icons/like_filled 1.svg" alt="cart" class="like_fill"> Positive reviews<br> Above avarage</p>
+                            </div>
+                            <div class="review_right">
+                                <p>orders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+
+    </div>
+
+    <script src="js/items.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script>
+        $(document).on('ready', function() {
+            $(".slider").slick({
+                lazyLoad: 'ondemand',
+                infinite: true
+            });
+        });
+    </script>
+</body>
+
+</html>
