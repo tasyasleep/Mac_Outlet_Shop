@@ -86,12 +86,17 @@
                 </div>
             </div>
             <div class="search">
-                <input type="search" placeholder="Enter device name..." class="deviceInp" style="background-image: url(img/icons/search.svg)">
+                <input type="search" placeholder="Enter device name..." id="deviceInp" style="background-image: url(img/icons/search.svg)">
                 <div class="img-filter">
                     <img src="img/icons/filter.svg" alt="Image">
                 </div>
                 <div class="img-sort">
                     <img src="img/icons/Sort.svg" alt="Image">
+                    <select id="sortDevice">
+                        <option value="def">Default</option>
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
                 </div>
             </div>
             <div class="container">

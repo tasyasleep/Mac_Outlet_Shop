@@ -54,6 +54,9 @@ const renderCard = device => {
         imgStock.src = 'img/icons/close 1.svg';
         btnAddToCart.setAttribute('disabled', '');
     }
+    imgLike.addEventListener('click', e => {
+        imgLike.src = 'img/icons/like_filled 1.svg';
+    })
     container.append(like, img, title, onStock, price, btnAddToCart, devReviews);
 
     container.addEventListener('click', e => {
@@ -90,20 +93,19 @@ const renderModalWindow = (card) => {
     const infoAboutDevice = {
         title: cElem('h3', 'modalWindow__container__center__title', device.name),
         statistic: cElem('div', 'card_reviews'),
-        color: cElem('p', 'modalWindow__container__center__color', `Color: ${device.color}`),
+        color: cElem('p', 'modalWindow__container__center__color', `Color: ${device.color.join(', ')}`),
         os: cElem('p', 'modalWindow__container__center__os', `Operation System: ${device.os}`),
-        chip: cElem('p', 'modalWindow__container__center__chip', `Chip: ${device.chip.name} ${device.chip.cores}`),
-        ram: cElem('p', 'modalWindow__container__center__ram', `Ram: ${device.ram} GB`),
+        chip: cElem('p', 'modalWindow__container__center__chip', `Chip: ${device.chip.name}`),
         storage: cElem('p', 'modalWindow__container__center__storage', `Storage: ${device.storage} GB`),
-        display: cElem('p', 'modalWindow__container__center__display', `Display: ${device.display}`),
+        display: cElem('p', 'modalWindow__container__center__display', `Display: ${device.display} inch`),
         height: cElem('p', 'modalWindow__container__center__height', `Height: ${device.size.height} cm`),
         width: cElem('p', 'modalWindow__container__center__width', `Width: ${device.size.width} cm`),
-        depth: cElem('p', 'modalWindow__container__center__depth', `Depth: ${device.size.depth}`),
+        depth: cElem('p', 'modalWindow__container__center__depth', `Depth: ${device.size.depth} cm`),
         weight: cElem('p', 'modalWindow__container__center__weight', `Weight: ${device.size.weight} kg`),
     }
+
     infoAboutDevice.statistic.innerHTML = card.querySelector('.card_reviews').innerHTML;
     containerInCenter.append(...(Object.values(infoAboutDevice)));
-
     const price = cElem('p', 'modalWindow__container__right__price', `$ ${device.price}`);
     const stock = cElem('p', 'modalWindow__container__right__stock', `Stock: ${device.orderInfo.inStock} psc.`);
     const btn = cElem('button', 'card__btn', 'Add to cart');
@@ -118,17 +120,11 @@ const renderModalWindow = (card) => {
 /////////////////// Filters aside of the page  //////////
 
 
-
-
-
-
-////////////////////////////////////////
-
 class Utils {
     constructor() {
         this.priceRange = this._getPriceRange();
         this.colors = this._getColors();
-        this.operationSystem = this._getOperationSystem();
+        this.operationSystem = this._getOS();
         this.storage = this._getStorage();
     }
     _getPriceRange() {
@@ -148,7 +144,7 @@ class Utils {
         })
         return result;
     }
-    _getOperationSystem() {
+    _getOS() {
         let result = [];
         items.forEach(item => {
             result.includes(item.os) || result.push(item.os)
@@ -167,6 +163,11 @@ const utils = new Utils();
 
 class AsideFilter {
     constructor() {
+        this.renderItems = [...items];
+        this.config = {
+            searchValue: '',
+            sortValue: 'def',
+        }
         this.filtersArr = [{
                 type: 'range',
                 title: 'Price',
@@ -200,10 +201,32 @@ class AsideFilter {
                 type: 'check',
                 title: 'Display',
                 class: 'displayParam',
-                variants: ['1 - 6 inch', '6 - 11 inch', '11 - 16 inch', '16 - 27 inch', '+ 27 inch'],
+                variants: ['1 - 6 inch', '6 - 11 inch', '11 - 16 inch', '16 - 27 inch'],
                 checked: [],
             },
         ]
+    }
+    changePrice(type, price) {
+        if (!isNaN(price)) {
+            this.filtersArr[0].changes[type] = +price;
+        }
+        mainFilter.runAsideFilter();
+    }
+    change(data, index) {
+        const checkIndex = this.filtersArr[index].checked.indexOf(data);
+        if (checkIndex > -1) {
+            this.filtersArr[index].checked.splice(checkIndex, 1)
+        } else {
+            this.filtersArr[index].checked.push(data);
+        }
+        mainFilter.runAsideFilter()
+    }
+}
+const asideFilter = new AsideFilter();
+
+class RenderFilter extends AsideFilter {
+    constructor() {
+        super()
     }
     get contentRenderMethods() {
         return {
@@ -266,5 +289,106 @@ class AsideFilter {
         return [containerFrom, containerTo];
     }
 }
-const asideFilter = new AsideFilter();
-asideFilter.renderFilters();
+const renderFilter = new RenderFilter();
+renderFilter.renderFilters();
+
+
+
+class MainFilter extends AsideFilter {
+    constructor() {
+        super();
+        this.runAsideFilter = () => {
+            this.cards = [...items];
+            this.sortItems();
+            this.cards = this.cards.filter(item => {
+                const name = item.name.toLowerCase();
+                const nameInp = name.includes(this.config.searchValue);
+                const price = item.price >= this.filtersArr[0].changes.from && item.price <= this.filtersArr[0].changes.to;
+                const color = this.filtersArr[1].checked.length < 1 || item.color.some(color => this.filtersArr[1].checked.includes(color));
+                const storage = this.filtersArr[2].checked.length < 1 || this.filtersArr[2].checked.includes(item.storage);
+                const os = this.filtersArr[3].checked.length < 1 || this.filtersArr[3].checked.includes(item.os);
+                const display = this.filtersArr[4].checked.map(display => {
+                    return display.split(' ').filter(num => !isNaN(num))
+                })
+                const inpDisplay = this.filtersArr[4].checked.length < 1 ||
+                    (item.display !== null) &&
+                    display.some(elem => {
+                        const from = +elem[0];
+                        const to = +elem[1];
+                        const res = from <= item.display && to >= item.display;
+                        return res;
+                    })
+                return nameInp && price && color && storage && os && inpDisplay;
+            })
+            renderCards(this.cards);
+        }
+    }
+    sortItems(value = this.config.sortValue, arr = this.cards) {
+        if (value === 'def') {
+            return;
+        }
+        arr.sort((a, b) => {
+            if (a.price > b.price) return value === 'asc' ? -1 : 1
+            if (a.price < b.price) return value === 'asc' ? 1 : -1
+            return 0;
+        })
+    }
+    SortByCategory
+}
+const mainFilter = new MainFilter();
+
+const inpFrom = gElem('.inputFrom');
+inpFrom.oninput = (e) => {
+    const value = e.target.value;
+    mainFilter.changePrice('from', value);
+}
+const inpTo = gElem('.inputTo');
+inpTo.oninput = (e) => {
+    const value = e.target.value;
+    mainFilter.changePrice('to', value);
+}
+
+const storage = document.querySelectorAll('.storageParam');
+storage.forEach(item => {
+    item.oninput = (e) => {
+        const name = +e.target.name;
+        mainFilter.change(name, 2)
+    }
+})
+
+const inpOs = document.querySelectorAll('.osParam');
+inpOs.forEach(item => {
+    item.oninput = (e) => {
+        const os = e.target.name;
+        mainFilter.change(os, 3)
+    }
+})
+
+const inpColor = document.querySelectorAll('.colorParam');
+inpColor.forEach(item => {
+    item.oninput = (e) => {
+        const color = e.target.name;
+        mainFilter.change(color, 1)
+    }
+})
+
+const checkDisplay = document.querySelectorAll('.displayParam');
+checkDisplay.forEach(item => {
+    item.oninput = (e) => {
+        const paramDispl = e.target.name;
+        mainFilter.change(paramDispl, 4);
+    }
+})
+
+
+const devInp = gElem('#deviceInp');
+devInp.oninput = (e) => {
+    mainFilter.config.searchValue = e.target.value.toLowerCase();
+    mainFilter.runAsideFilter();
+}
+
+const sortDev = gElem('#sortDevice');
+sortDev.onchange = (e) => {
+    mainFilter.config.sortValue = e.target.value;
+    mainFilter.runAsideFilter();
+}
