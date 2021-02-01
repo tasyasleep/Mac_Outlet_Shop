@@ -202,21 +202,6 @@ class AsideFilter {
             },
         ]
     }
-    changePrice(type, price) {
-        if (!isNaN(price)) {
-            this.filtersArr[0].changes[type] = +price;
-        }
-        mainFilter.runAsideFilter();
-    }
-    change(data, index) {
-        const checkIndex = this.filtersArr[index].checked.indexOf(data);
-        if (checkIndex > -1) {
-            this.filtersArr[index].checked.splice(checkIndex, 1)
-        } else {
-            this.filtersArr[index].checked.push(data);
-        }
-        mainFilter.runAsideFilter()
-    }
 }
 const asideFilter = new AsideFilter();
 
