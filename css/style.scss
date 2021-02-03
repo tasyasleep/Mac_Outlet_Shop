@@ -315,8 +315,7 @@ p {
         position: relative;
         width: 1024px;
         height: 500px;
-        top: 10%;
-        left: 10%;
+       margin: 30px auto;
         display: flex;
         background-color: #fff;
         box-sizing: border-box;
@@ -474,6 +473,25 @@ p {
     font-size: 18px;
     cursor: pointer;
     transition: all 1s ease;
+}
+@media (max-width: 1130px) {
+    .modalWindow__container {
+        max-width: 800px;
+    }
+    .modalWindow__container__center {
+        width: 300px;
+    }
+    .modalWindow__container__center .card_reviews {
+        margin-left: -30px;
+        width: 250px;
+    }
+    .modalWindow__container__right {
+        margin-left: 0;
+    }
+    .modalWindow__container__right .card__btn {
+        position: relative;
+        left: 5px;
+    }
 }
 
 @media (min-width: 1082px) {
