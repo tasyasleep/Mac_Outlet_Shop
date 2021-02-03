@@ -60,8 +60,8 @@ const renderDevice = device => {
     container.append(like, img, title, onStock, price, btnAddToCart, devReviews);
 
     container.addEventListener('click', e => {
-        renderModalWindow(e.currentTarget);
-    }, true)
+        renderModalWindow(container);
+    })
     return container;
 
 }
@@ -85,9 +85,9 @@ const renderModalWindow = (card) => {
     const containerRight = cElem('div', 'modalWindow__container__right');
     const img = cElem('img', 'modalWindow__container__leftimg__img');
     img.src = `img/${device.imgUrl}`;
-    modalWindow.addEventListener('click', e => {
+     modalWindow.addEventListener('click', e => {
         e.stopPropagation();
-        modalWindow.classList.remove('visible');
+        e.target.classList[0] === 'modalWindow' && modalWindow.classList.remove('visible');
     })
     containerWithImg.append(img);
     const infoAboutDevice = {
@@ -112,6 +112,11 @@ const renderModalWindow = (card) => {
     containerRight.append(price, stock, btn);
     if (device.orderInfo.inStock === 0) {
         btn.setAttribute('disabled', '');
+    }
+    if (btn.classList[0] === 'card__btn') {
+        btn.onclick = e => {
+            e.stopPropagation();
+        }
     }
     container.append(containerWithImg, containerInCenter, containerRight);
     modalWindow.clear().appendChild(container);
