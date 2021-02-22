@@ -22,93 +22,91 @@
                 <div class="logo">
                     <a href="#"><img src="img/icons/logo.svg" alt="cart" class="logo_img"></a>
                 </div>
+                <div class="cart-container disabled">
+                    <div class="cart"></div>
+                </div>
                 <div class="basket">
                     <a href="#"><img src="img/icons/basket.svg" alt="cart" class="basket_img">
                     </a>
                 </div>
-                <span>
-                    <p>3</p>
-                </span>
-            </div>
-
-        </header>
-
-        <main id="main">
-            <div class="slider">
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/ipad_air_banner.jpg)">
-                        <div class="slider-text">
-                            <h1>IPad Air</h1>
-                            <button disabled type="button" class="slider-btn">Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/airpods_pro_banner.png)"></div>
-                    <div class="slider-text">
-                        <h1>AirPods Pro</h1>
-                        <button type="button" class="slider-btn">Add to cart</button>
-                    </div>
-                </div>
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/watch_banner.jpg)"></div>
-                    <div class="slider-text">
-                        <h1>Apple Watch 4</h1>
-                        <button type="button" class="slider-btn">Add to cart</button>
-                    </div>
-                </div>
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/iphone_12_banner.jpg)"></div>
-                    <div class="slider-text">
-                        <button type="button" class="slider-btn">Add to cart</button>
-                    </div>
-                </div>
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/mac_book_banner.jpg)"></div>
-                    <div class="slider-text">
-                        <h1>MacBook Pro 16</h1>
-                        <button type="button" class="slider-btn">Add to cart</button>
-                    </div>
-                </div>
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/apple_tv_banner.png)"></div>
-                    <div class="slider-text">
-                        <h1>Apple TV</h1>
-                        <button type="button" class="slider-btn">Add to cart</button>
-                    </div>
-                </div>
-                <div class="slide-holder">
-                    <div class="slide" style="background-image: url(img/banners/air_pods_max_banner.jpg)"></div>
-                    <div class="slider-text">
-                        <h1>AirPods Max</h1>
-                        <button type="button" class="slider-btn">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="search">
-                <input type="search" placeholder="Enter device name..." id="deviceInp" style="background-image: url(img/icons/search.svg)">
-                <div class="img-filter">
-                    <img src="img/icons/filter.svg" alt="Image">
-                </div>
-                <div class="img-sort">
-                    <img src="img/icons/Sort.svg" alt="Image">
-                    <select id="sortDevice">
-                        <option value="def">Default</option>
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
-                </div>
-            </div>
-            <div class="container">
-                <div class="filterContainer">
-                    <div class="filterItem_name"></div>
-                </div>
-                <div class="list_device">
-                    <div class="card">
-                    </div>
-                </div>
+                <span class="cart-total-amount">
+                 </span>
             </div>
     </div>
+
+    </header>
+
+    <main id="main">
+        <div class="slider">
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/ipad_air_banner.jpg)">
+                    <div class="slider-text">
+                        <h1>IPad Air</h1>
+                        <button disabled type="button" class="slider-btn">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/airpods_pro_banner.png)"></div>
+                <div class="slider-text">
+                    <h1>AirPods Pro</h1>
+                    <button type="button" class="slider-btn">Add to cart</button>
+                </div>
+            </div>
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/watch_banner.jpg)"></div>
+                <div class="slider-text">
+                    <h1>Apple Watch 4</h1>
+                    <button type="button" class="slider-btn">Add to cart</button>
+                </div>
+            </div>
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/iphone_12_banner.jpg)"></div>
+                <div class="slider-text">
+                    <button type="button" class="slider-btn">Add to cart</button>
+                </div>
+            </div>
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/mac_book_banner.jpg)"></div>
+                <div class="slider-text">
+                    <h1>MacBook Pro 16</h1>
+                    <button type="button" class="slider-btn">Add to cart</button>
+                </div>
+            </div>
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/apple_tv_banner.png)"></div>
+                <div class="slider-text">
+                    <h1>Apple TV</h1>
+                    <button type="button" class="slider-btn">Add to cart</button>
+                </div>
+            </div>
+            <div class="slide-holder">
+                <div class="slide" style="background-image: url(img/banners/air_pods_max_banner.jpg)"></div>
+                <div class="slider-text">
+                    <h1>AirPods Max</h1>
+                    <button type="button" class="slider-btn">Add to cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="search">
+            <input type="search" placeholder="Enter device name..." id="deviceInp" style="background-image: url(img/icons/search.svg)">
+            <div class="img-filter">
+                <img src="img/icons/filter.svg" alt="Image">
+            </div>
+            <div class="img-sort">
+                <img src="img/icons/Sort.svg" alt="Image">
+            </div>
+        </div>
+        <div class="container">
+            <div class="filterContainer">
+                <div class="filterItem_name"></div>
+            </div>
+            <div class="list_device">
+                <div class="card">
+                </div>
+            </div>
+        </div>
+        </div>
     </main>
 
     </div>

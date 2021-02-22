@@ -18,9 +18,9 @@ const gElem = param => {
     return elem;
 }
 
-const listContainer = gElem('.list_device')
+const listOfDevices = gElem('.list_device')
 
-const renderCard = device => {
+const renderDevice = device => {
     const container = cElem('div', 'card');
     container.id = device.id;
     const like = cElem('div', 'device_like');
@@ -47,7 +47,12 @@ const renderCard = device => {
     devReviews.innerHTML = `<p><img src="img/icons/like_filled 1.svg" alt="cart" class="like_fill"><b> ${device.orderInfo.reviews}%</b> Positive reviews<br> Above avarage</p>`
     right.innerHTML = `<p><b> ${device.price}</b> <br> orders</p>`
     devReviews.appendChild(right);
-
+    if (btnAddToCart.classList[0] === 'card__btn') {
+        btnAddToCart.onclick = e => {
+            e.stopPropagation();
+            mainCart.addToCart(device.id);
+        }
+    }
     if (`${device.orderInfo.inStock}` != 0) {
         imgStock.src = 'img/icons/check 1.svg';
     } else {
@@ -55,23 +60,24 @@ const renderCard = device => {
         btnAddToCart.setAttribute('disabled', '');
     }
     imgLike.addEventListener('click', e => {
-        imgLike.src = 'img/icons/like_filled 1.svg';
+        if (imgLike.src = 'img/icons/like_empty.svg')
+            imgLike.src = 'img/icons/like_filled 1.svg';
     })
     container.append(like, img, title, onStock, price, btnAddToCart, devReviews);
 
     container.addEventListener('click', e => {
-        renderModalWindow(e.currentTarget);
-    }, true)
+        renderModalWindow(container);
+    })
     return container;
 
 }
 
-const renderCards = list => {
-    const elems = list.map(item => renderCard(item))
-    listContainer.clear().add(elems);
+const renderItems = list => {
+    const elems = list.map(item => renderDevice(item))
+    listOfDevices.clear().add(elems);
 }
 
-renderCards(items);
+renderItems(items);
 
 /////////////// Render modal window ////////////
 
@@ -87,7 +93,7 @@ const renderModalWindow = (card) => {
     img.src = `img/${device.imgUrl}`;
     modalWindow.addEventListener('click', e => {
         e.stopPropagation();
-        modalWindow.classList.remove('visible');
+        e.target.classList[0] === 'modalWindow' && modalWindow.classList.remove('visible');
     })
     containerWithImg.append(img);
     const infoAboutDevice = {
@@ -112,6 +118,12 @@ const renderModalWindow = (card) => {
     containerRight.append(price, stock, btn);
     if (device.orderInfo.inStock === 0) {
         btn.setAttribute('disabled', '');
+    }
+    if (btn.classList[0] === 'card__btn') {
+        btn.onclick = e => {
+            e.stopPropagation();
+            mainCart.addToCart(device.id)
+        }
     }
     container.append(containerWithImg, containerInCenter, containerRight);
     modalWindow.clear().appendChild(container);
@@ -166,7 +178,6 @@ class AsideFilter {
         this.renderItems = [...items];
         this.config = {
             searchValue: '',
-            sortValue: 'def',
         }
         this.filtersArr = [{
                 type: 'range',
@@ -206,20 +217,20 @@ class AsideFilter {
             },
         ]
     }
-    changePrice(type, price) {
+    renderPrice(type, price) {
         if (!isNaN(price)) {
             this.filtersArr[0].changes[type] = +price;
         }
-        mainFilter.runAsideFilter();
+        mainFilter.sortItemsByFilter();
     }
-    change(data, index) {
+    changeByPoints(data, index) {
         const checkIndex = this.filtersArr[index].checked.indexOf(data);
         if (checkIndex > -1) {
             this.filtersArr[index].checked.splice(checkIndex, 1)
         } else {
             this.filtersArr[index].checked.push(data);
         }
-        mainFilter.runAsideFilter()
+        mainFilter.sortItemsByFilter()
     }
 }
 const asideFilter = new AsideFilter();
@@ -230,11 +241,11 @@ class RenderFilter extends AsideFilter {
     }
     get contentRenderMethods() {
         return {
-            check: this._renderContentCheck.bind(this),
-            range: this._renderContentRange.bind(this),
+            check: this.checkFilters.bind(this),
+            range: this.filterPrice.bind(this),
         }
     }
-    _renderCategory(item) {
+    renderByCategory(item) {
         const container = cElem('div', 'filterItem');
         const title = cElem('div', 'filterItem__title');
         title.innerHTML = `
@@ -255,11 +266,11 @@ class RenderFilter extends AsideFilter {
     }
     renderFilters() {
         const container = document.querySelector('.filterContainer');
-        const filters = this.filtersArr.map(item => this._renderCategory(item));
+        const filters = this.filtersArr.map(item => this.renderByCategory(item));
         container.innerHTML = '';
         container.append(...filters);
     }
-    _renderContentCheck(item) {
+    checkFilters(item) {
         const index = item.variants.indexOf(null);
         index === -1 || item.variants.splice(index, 1);
         return item.variants.map(variant => {
@@ -270,10 +281,13 @@ class RenderFilter extends AsideFilter {
             inp.name = variant;
             inp.classList.add(item.class);
             label.append(inp, title);
+            if (item.title === 'Memory') {
+                title.innerText += " GB";
+            }
             return label;
         })
     }
-    _renderContentRange(item) {
+    filterPrice(item) {
         const containerFrom = cElem('div');
         const labelFrom = cElem('label', null, 'From');
         const inputFrom = cElem('input');
@@ -297,9 +311,9 @@ renderFilter.renderFilters();
 class MainFilter extends AsideFilter {
     constructor() {
         super();
-        this.runAsideFilter = () => {
+        this.sortItemsByFilter = () => {
             this.cards = [...items];
-            this.sortItems();
+
             this.cards = this.cards.filter(item => {
                 const name = item.name.toLowerCase();
                 const nameInp = name.includes(this.config.searchValue);
@@ -311,84 +325,256 @@ class MainFilter extends AsideFilter {
                     return display.split(' ').filter(num => !isNaN(num))
                 })
                 const inpDisplay = this.filtersArr[4].checked.length < 1 ||
-                    (item.display !== null) &&
+
                     display.some(elem => {
                         const from = +elem[0];
                         const to = +elem[1];
-                        const res = from <= item.display && to >= item.display;
-                        return res;
+                        const result = from <= item.display && to >= item.display;
+                        return result;
                     })
                 return nameInp && price && color && storage && os && inpDisplay;
+
             })
-            renderCards(this.cards);
+            renderItems(this.cards);
         }
-    }
-    sortItems(value = this.config.sortValue, arr = this.cards) {
-        if (value === 'def') {
-            return;
+        const inpFrom = gElem('.inputFrom');
+        const inpTo = gElem('.inputTo');
+        const storage = document.querySelectorAll('.storageParam');
+        const inpOs = document.querySelectorAll('.osParam');
+        const inpColor = document.querySelectorAll('.colorParam');
+        const checkDisplay = document.querySelectorAll('.displayParam');
+        const devInp = gElem('#deviceInp');
+        inpFrom.oninput = (e) => {
+            const value = e.target.value;
+            mainFilter.renderPrice('from', value);
         }
-        arr.sort((a, b) => {
-            if (a.price > b.price) return value === 'asc' ? -1 : 1
-            if (a.price < b.price) return value === 'asc' ? 1 : -1
-            return 0;
+        inpTo.oninput = (e) => {
+            const value = e.target.value;
+            mainFilter.renderPrice('to', value);
+        }
+        storage.forEach(item => {
+            item.oninput = (e) => {
+                const name = +e.target.name;
+                mainFilter.changeByPoints(name, 2)
+            }
         })
+        inpOs.forEach(item => {
+            item.oninput = (e) => {
+                const os = e.target.name;
+                mainFilter.changeByPoints(os, 3)
+            }
+        })
+        inpColor.forEach(item => {
+            item.oninput = (e) => {
+                const color = e.target.name;
+                mainFilter.changeByPoints(color, 1)
+            }
+        })
+        checkDisplay.forEach(item => {
+            item.oninput = (e) => {
+                const paramDispl = e.target.name;
+                mainFilter.changeByPoints(paramDispl, 4);
+            }
+        })
+        devInp.oninput = (e) => {
+            mainFilter.config.searchValue = e.target.value.toLowerCase();
+            mainFilter.sortItemsByFilter();
+        }
     }
-    SortByCategory
+
 }
 const mainFilter = new MainFilter();
 
-const inpFrom = gElem('.inputFrom');
-inpFrom.oninput = (e) => {
-    const value = e.target.value;
-    mainFilter.changePrice('from', value);
-}
-const inpTo = gElem('.inputTo');
-inpTo.oninput = (e) => {
-    const value = e.target.value;
-    mainFilter.changePrice('to', value);
-}
 
-const storage = document.querySelectorAll('.storageParam');
-storage.forEach(item => {
-    item.oninput = (e) => {
-        const name = +e.target.name;
-        mainFilter.change(name, 2)
-    }
-})
 
-const inpOs = document.querySelectorAll('.osParam');
-inpOs.forEach(item => {
-    item.oninput = (e) => {
-        const os = e.target.name;
-        mainFilter.change(os, 3)
-    }
-})
+/////////////////////////////////////////////////
+////////////////// Cart ///////////////////////
 
-const inpColor = document.querySelectorAll('.colorParam');
-inpColor.forEach(item => {
-    item.oninput = (e) => {
-        const color = e.target.name;
-        mainFilter.change(color, 1)
-    }
-})
 
-const checkDisplay = document.querySelectorAll('.displayParam');
-checkDisplay.forEach(item => {
-    item.oninput = (e) => {
-        const paramDispl = e.target.name;
-        mainFilter.change(paramDispl, 4);
+const basket = document.querySelector('.basket');
+const cartContainer = document.querySelector('.cart-container');
+basket.addEventListener('click', event => {
+    if (cartContainer.classList[1] === 'disabled') {
+        cartContainer.setAttribute('class', 'cart-container')
+    } else {
+        cartContainer.setAttribute('class', 'cart-container disabled')
     }
 })
 
 
-const devInp = gElem('#deviceInp');
-devInp.oninput = (e) => {
-    mainFilter.config.searchValue = e.target.value.toLowerCase();
-    mainFilter.runAsideFilter();
+
+class Cart {
+    constructor() {
+        this.items = [];
+        this.totalAmount = 0;
+        this.totalPrice = 0;
+        this.removeFRomLS();
+    }
+    saveCart() {
+        const devicesAll = JSON.stringify(this);
+        localStorage.setItem('cart', devicesAll);
+    }
+    removeFRomLS() {
+        const devicesAll = localStorage.getItem('cart')
+        if (devicesAll !== null) {
+            const cart = JSON.parse(devicesAll);
+            Object.assign(this, cart)
+        }
+    }
+
+    addToCart(id, count = 0) {
+        const itemsInCard = items.find(item => item.id === id);
+        const addItems = this.items.find(item => item.id === id);
+        if (count < 4) {
+            if (!addItems) {
+                this.items.push({ id, count: 1, price: itemsInCard.price })
+            } else {
+                addItems.count++;
+                addItems.price += itemsInCard.price;
+            }
+        }
+        this.amountTotalValues();
+    }
+    deleteItemfromCart(id) {
+        const indexOfCard = this.items.findIndex(item => item.id === id)
+        this.items.splice(indexOfCard, 1);
+        this.amountTotalValues();
+    }
+    deleteFromCart(id, count) {
+        const itemsInCard = items.find(item => item.id === id);
+        const indexOfCard = this.items.findIndex(item => item.id === id);
+        if (count > 1) {
+            this.items[indexOfCard].count--;
+            this.items[indexOfCard].price -= itemsInCard.price;
+        }
+        this.amountTotalValues();
+    }
+    amountTotalValues() {
+        this.totalAmount = 0;
+        this.totalPrice = 0;
+        const totalResult = this.items.forEach(item => {
+            const deviceItem = this.items.find(device => item.id === device.id);
+            this.totalAmount += item.count;
+            this.totalPrice += deviceItem.price * item.count;
+        })
+        this.saveCart();
+        instanceCartFilter.renderTotalInfo();
+        instanceCartFilter.rendercartTotalInfo();
+        instanceCartFilter.filtrationMainContent();
+    }
+
+}
+const mainCart = new Cart();
+
+
+
+const cartTitle = cElem('div', 'cart_title');
+cartTitle.innerHTML = `
+<h3>Shopping Cart</h3>
+<p>Checkout is almost done!</p>`
+const cartDevices = cElem('div', 'cart_devices');
+const cartTotalInfo = cElem('div', 'cart_total');
+cartTotalInfo.innerHTML = `
+<p>Total amount:<b> ${mainCart.totalAmount}</b> ptc.</p>
+<p>Total price: <b>${mainCart.totalPrice}$</b></p>`;
+const cartButtonContainer = cElem('div', 'cart_btn_container');
+const cartBtn = cElem('button', 'cart_btn', `Buy`);
+cartButtonContainer.append(cartBtn);
+const total = document.querySelector('.cart-total-amount')
+total.innerHTML = `
+<p>${mainCart.totalAmount}</p>`
+cartContainer.append(cartTitle, cartDevices, cartTotalInfo, cartButtonContainer);
+
+
+class cartFilter {
+    constructor() {
+        this.renderTotalInfo();
+        this.renderCards();
+    }
+    renderCards() {
+        cartBtn.onclick = () => {
+            const mainCart = cartContainer.classList.toggle('active')
+            if (mainCart) {
+                this.filtrationMainContent();
+                this.rendercartTotalInfo();
+            }
+        }
+    }
+
+    filtrationMainContent() {
+        cartDevices.innerHTML = '';
+        if (mainCart.totalAmount === 0) {
+            cartDevices.innerHTML = `<h4>Your cart is empty!!!</h4>`
+            return;
+        }
+        const itemsForCart = [];
+        const itemsFromCart = mainCart.items;
+        items.forEach(devices => {
+            const devicesFromCart = itemsFromCart.find(item => item.id === devices.id)
+            if (devicesFromCart) {
+                itemsForCart.push({
+                    data: devices,
+                    count: devicesFromCart.count,
+                    totalPrice: devicesFromCart.price,
+                })
+            }
+        })
+        itemsForCart.forEach(item => {
+            const container = cElem('div', 'cart_devices__items');
+            const containerWithImg = cElem('div', 'cart_img');
+            const img = cElem('img', 'imgCart');
+            img.src = `img/${item.data.imgUrl}`;
+            containerWithImg.append(img);
+            const containerTitle = cElem('div', 'cart_devices__item');
+            containerTitle.innerHTML = `
+            <h4>${item.data.name}</h4>
+            <div class="cart_price">
+            <p>$ ${item.data.price}</p>
+            </div>`
+            const cartContainerAmount = cElem('div', 'cart_devices__amount');
+            const minusBtn = cElem('button', 'minus_btn', '<');
+            minusBtn.id = item.data.id;
+            minusBtn.count = item.count;
+            minusBtn.onclick = (e) => {
+                let minusId = Number(e.currentTarget.id);
+                let minusAmount = Number(e.currentTarget.count);
+                mainCart.deleteFromCart(minusId, minusAmount);
+            }
+            const amountItems = cElem('div', 'item-amount');
+            amountItems.innerHTML = `<p>${item.count}</p>`;
+            amountItems.id = item.data.id;
+            const plusBtn = cElem('button', 'plus_btn', '>');
+            plusBtn.id = item.data.id;
+            plusBtn.onclick = (e) => {
+                let plusId = Number(e.currentTarget.id);
+                mainCart.addToCart(plusId);
+            }
+            const deleteBtn = cElem('button', 'delete_btn', 'X');
+            deleteBtn.id = item.data.id;
+            deleteBtn.onclick = (e) => {
+                let deleteId = Number(e.currentTarget.id);
+                mainCart.deleteItemfromCart(deleteId);
+            }
+            if (item.count <= 1) {
+                minusBtn.setAttribute('disabled', '');
+            }
+            if (item.count > 3) {
+                plusBtn.setAttribute('disabled', '');
+            }
+            cartDevices.append(container);
+            container.append(containerWithImg, containerTitle, cartContainerAmount)
+            cartContainerAmount.append(minusBtn, amountItems, plusBtn, deleteBtn)
+        })
+    }
+    renderTotalInfo() {
+        total.innerHTML = `
+        <p>${mainCart.totalAmount}</p>`
+    }
+    rendercartTotalInfo() {
+        cartTotalInfo.innerHTML = `
+        <p>Total amount:<b> ${mainCart.totalAmount}</b> ptc.</p>
+        <p>Total price: <b>${mainCart.totalPrice}$</b></p>`;
+    }
 }
 
-const sortDev = gElem('#sortDevice');
-sortDev.onchange = (e) => {
-    mainFilter.config.sortValue = e.target.value;
-    mainFilter.runAsideFilter();
-}
+const instanceCartFilter = new cartFilter();
