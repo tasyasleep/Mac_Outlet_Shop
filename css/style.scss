@@ -48,6 +48,7 @@ p {
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
     span {
         position: absolute;
         display: flex;
@@ -58,6 +59,8 @@ p {
         border-radius: 50%;
         background-color: #0E49B5;
         z-index: 100;
+        right: 62px;
+        margin: 21px;
     }
     span p {
         color: #ffffff;
@@ -162,21 +165,6 @@ p {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
 }
 
-select {
-    width: 162px;
-    height: 30px;
-    padding: 20px 25px;
-    margin-left: -110px;
-    border: 1px solid #E2E2E2;
-    box-sizing: border-box;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    font-size: 16px;
-    line-height: 18px;
-    color: #102243;
-    background: #EDF3FF;
-}
-
 .img-filter {
     position: absolute;
     width: 40px;
@@ -194,7 +182,7 @@ select {
 }
 
 .basket {
-    margin: 0;
+    margin: 0 50px;
     padding: 6px;
     width: 40px;
     height: 40px;
@@ -327,8 +315,7 @@ select {
         position: relative;
         width: 1024px;
         height: 500px;
-        top: 10%;
-        left: 10%;
+        margin: 30px auto;
         display: flex;
         background-color: #fff;
         box-sizing: border-box;
@@ -488,30 +475,46 @@ select {
     transition: all 1s ease;
 }
 
-@media(min-width: 1100px) {
-    .header-content {
-        span {
-            right: 90px;
-        }
+@media (max-width: 1130px) {
+    .modalWindow__container {
+        max-width: 800px;
+    }
+    .modalWindow__container__center {
+        width: 300px;
+    }
+    .modalWindow__container__center .card_reviews {
+        margin-left: -30px;
+        width: 250px;
+    }
+    .modalWindow__container__right {
+        margin-left: 0;
+    }
+    .modalWindow__container__right .card__btn {
+        position: relative;
+        left: 5px;
     }
 }
 
-@media(min-width: 1180px) {
-    .header-content {
-        span {
-            right: 110px;
-        }
+@media (min-width: 1082px) {
+    .header-content span {
+        right: 70px;
     }
 }
 
-@media(min-width: 1300px) {
+@media (min-width: 1200px) {
+    .header-content span {
+        right: 130px;
+    }
+}
+
+@media (min-width: 1300px) {
     .header-content span {
         right: 180px;
     }
 }
 
-@media(min-width: 1400px) {
+@media (min-width: 1400px) {
     .header-content span {
-        right: 240px;
+        right: 230px;
     }
 }
