@@ -1,5 +1,4 @@
-const items = [
-    {
+const items = [{
         id: 1,
         category: 'mac',
         imgUrl: 'items/macbook-air.png',
@@ -33,8 +32,8 @@ const items = [
         os: 'macOS',
         InTheBox: ['MacBook Air', '30W USB-C Power Adapter', 'USB-C Charge Cable (2 m)'],
         orderInfo: {
-        	inStock: 435, // кол-во едениц товара в наличии
-        	reviews: 77, // процент положительных отзывов
+            inStock: 435, // кол-во едениц товара в наличии
+            reviews: 77, // процент положительных отзывов
         }
     },
     {
@@ -71,17 +70,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['MacBook Air', '30W USB-C Power Adapter', 'USB-C Charge Cable (2 m)'],
         orderInfo: {
-        	inStock: 0, // кол-во едениц товара в наличии
-        	reviews: 84, // процент положительных отзывов
+            inStock: 0, // кол-во едениц товара в наличии
+            reviews: 84, // процент положительных отзывов
         }
     },
     {
-        id: 3 ,
+        id: 3,
         category: 'mac',
         imgUrl: 'items/macbook-pro13.png',
         name: 'MacBook Pro 13',
         display: 13.3, // дюймы
-        color: [ 'Silver', 'Space Grey'],
+        color: ['Silver', 'Space Grey'],
         price: 1299, // доллары
         chip: {
             name: 'Intel Core i5',
@@ -109,17 +108,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['MacBook pro 13', '61W USB-C Power Adapter', 'USB-C Charge Cable (2 m)'],
         orderInfo: {
-        	inStock: 25, // кол-во едениц товара в наличии
-        	reviews: 85, // процент положительных отзывов
+            inStock: 25, // кол-во едениц товара в наличии
+            reviews: 85, // процент положительных отзывов
         }
     },
     {
-        id: 4 ,
+        id: 4,
         category: 'mac',
         imgUrl: 'items/macbook-pro13.png',
         name: 'MacBook Pro 13',
         display: 13.3, // дюймы
-        color: [ 'Silver', 'Space Grey'],
+        color: ['Silver', 'Space Grey'],
         price: 1499, // доллары
         chip: {
             name: 'M1',
@@ -147,17 +146,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['MacBook pro 13', '61W USB-C Power Adapter', 'USB-C Charge Cable (2 m)'],
         orderInfo: {
-        	inStock: 256, // кол-во едениц товара в наличии
-        	reviews: 80, // процент положительных отзывов
+            inStock: 256, // кол-во едениц товара в наличии
+            reviews: 80, // процент положительных отзывов
         }
     },
     {
-        id: 5 ,
+        id: 5,
         category: 'mac',
         imgUrl: 'items/macbook-pro16.png',
         name: 'MacBook Pro 16',
         display: 16, // дюймы
-        color: [ 'Silver', 'Space Grey'],
+        color: ['Silver', 'Space Grey'],
         price: 2399, // доллары
         chip: {
             name: ' Intel Core i7',
@@ -185,17 +184,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['MacBook pro 16', '96W USB-C Power Adapter', 'USB-C Charge Cable (2 m)'],
         orderInfo: {
-        	inStock: 124, // кол-во едениц товара в наличии
-        	reviews: 91, // процент положительных отзывов
+            inStock: 124, // кол-во едениц товара в наличии
+            reviews: 91, // процент положительных отзывов
         }
     },
     {
-        id: 6 ,
+        id: 6,
         category: 'mac',
         imgUrl: 'items/macbook-pro16.png',
         name: 'MacBook Pro 16',
         display: 16, // дюймы
-        color: [ 'Silver', 'Space Grey'],
+        color: ['Silver', 'Space Grey'],
         price: 2799, // доллары
         chip: {
             name: ' Intel Core i9',
@@ -223,21 +222,21 @@ const items = [
         os: 'macOS',
         InTheBox: ['MacBook pro 16', '96W USB-C Power Adapter', 'USB-C Charge Cable (2 m)'],
         orderInfo: {
-        	inStock: 69, // кол-во едениц товара в наличии
-        	reviews: 90, // процент положительных отзывов
+            inStock: 69, // кол-во едениц товара в наличии
+            reviews: 90, // процент положительных отзывов
         }
     },
     {
-        id: 7 ,
+        id: 7,
         category: 'mac',
         imgUrl: 'items/imac.png',
         name: 'IMac',
         display: 21.5, // дюймы
-        color: [  'Space Grey'],
+        color: ['Space Grey'],
         price: 1099, // доллары
         chip: {
             name: 'Intel Core i5,',
-            cores: '6',//dual‑core
+            cores: '6', //dual‑core
         },
         ram: 8, // Гб
         storage: 256,
@@ -261,21 +260,21 @@ const items = [
         os: 'macOS',
         InTheBox: ['iMac ', 'Magic Keyboard', 'Magic Mouse 2', 'Power cord', 'Lightning to USB Cable', 'Polishing cloth'],
         orderInfo: {
-        	inStock: 742, // кол-во едениц товара в наличии
-        	reviews: 75, // процент положительных отзывов
+            inStock: 742, // кол-во едениц товара в наличии
+            reviews: 75, // процент положительных отзывов
         }
     },
     {
-        id: 8 ,
+        id: 8,
         category: 'mac',
         imgUrl: 'items/imac.png',
         name: 'IMac',
         display: 27, // дюймы
-        color: [  'Space Grey'],
+        color: ['Space Grey'],
         price: 1799, // доллары
         chip: {
             name: 'Intel Core i5,',
-            cores: '6',//dual‑core
+            cores: '6', //dual‑core
         },
         ram: 8, // Гб
         storage: 256,
@@ -299,24 +298,24 @@ const items = [
         os: 'macOS',
         InTheBox: ['iMac with Retina 5K display ', 'Magic Keyboard', 'Magic Mouse 2', 'Power cord', 'Lightning to USB Cable', 'Polishing cloth'],
         orderInfo: {
-        	inStock: 0, // кол-во едениц товара в наличии
-        	reviews: 99, // процент положительных отзывов
+            inStock: 0, // кол-во едениц товара в наличии
+            reviews: 99, // процент положительных отзывов
         }
     },
     {
-        id: 9 ,
+        id: 9,
         category: 'mac',
         imgUrl: 'items/mac_pro.png',
         name: 'Mac Pro',
         display: null, // дюймы
-        color: [  'Space Grey'],
+        color: ['Space Grey'],
         price: 2499, // доллары
         chip: {
             name: 'Intel Xeon W',
-            cores: '16',//dual‑core
+            cores: '16', //dual‑core
         },
         ram: 64, // Гб
-        storage: 1024,//
+        storage: 1024, //
         touchId: false,
         faceId: false,
         wireless: ['Wi-Fi', 'Bluetooth 5.0 '],
@@ -337,17 +336,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['Mac Pro', 'Magic Keyboard with Numeric Keypad', 'Magic Mouse 2', 'USB-C to Lightning Cable (1 m)', 'Power cord (2 m)'],
         orderInfo: {
-        	inStock: 587, // кол-во едениц товара в наличии
-        	reviews: 56, // процент положительных отзывов
+            inStock: 587, // кол-во едениц товара в наличии
+            reviews: 56, // процент положительных отзывов
         }
     },
     {
-        id: 10 ,
+        id: 10,
         category: 'ipad',
         imgUrl: 'items/ipad-pro.jpeg',
         name: 'IPad Pro ',
         display: 11, // дюймы
-        color: [ 'Silver', 'Space Grey'],
+        color: ['Silver', 'Space Grey'],
         price: 750, // доллары
         chip: {
             name: 'A12Z Bionic',
@@ -375,17 +374,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['iPad Pro', 'USB-C Charge Cable (1 meter)', '18W USB-C Power Adapter'],
         orderInfo: {
-        	inStock: 32, // кол-во едениц товара в наличии
-        	reviews: 99, // процент положительных отзывов
+            inStock: 32, // кол-во едениц товара в наличии
+            reviews: 99, // процент положительных отзывов
         }
     },
     {
-        id: 34 ,
+        id: 34,
         category: 'ipad',
         imgUrl: 'items/ipad-air.png',
         name: 'IPad Air',
         display: 10.9, // дюймы
-        color: [ 'Silver', 'Space Grey','Rose Gold','Green','Sky Blue'],
+        color: ['Silver', 'Space Grey', 'Rose Gold', 'Green', 'Sky Blue'],
         price: 549, // доллары
         chip: {
             name: 'A14 Bionic ',
@@ -413,17 +412,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['iPad Air', 'USB-C Charge Cable (1 meter)', '20W USB-C Power Adapter'],
         orderInfo: {
-        	inStock: 97, // кол-во едениц товара в наличии
-        	reviews: 97, // процент положительных отзывов
+            inStock: 97, // кол-во едениц товара в наличии
+            reviews: 97, // процент положительных отзывов
         }
     },
     {
-        id: 11 ,
+        id: 11,
         category: 'ipad',
         imgUrl: 'items/ipad.png',
         name: 'IPad',
         display: 10.2, // дюймы
-        color: [ 'Silver', 'Space Grey','Gold'],
+        color: ['Silver', 'Space Grey', 'Gold'],
         price: 309, // доллары
         chip: {
             name: 'A12 Bionic  ',
@@ -451,17 +450,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['iPad', 'USB-C Power Adapter', 'Lightning to USB-C Cable'],
         orderInfo: {
-        	inStock: 90, // кол-во едениц товара в наличии
-        	reviews: 0, // процент положительных отзывов
+            inStock: 90, // кол-во едениц товара в наличии
+            reviews: 0, // процент положительных отзывов
         }
     },
     {
-        id: 12 ,
+        id: 12,
         category: 'ipad',
         imgUrl: 'items/ipad-mini.png',
         name: 'IPad mini',
         display: 7.9, // дюймы
-        color: [ 'Silver', 'Space Grey','Gold'],
+        color: ['Silver', 'Space Grey', 'Gold'],
         price: 309, // доллары
         chip: {
             name: 'A12 Bionic  ',
@@ -489,17 +488,17 @@ const items = [
         os: 'macOS',
         InTheBox: ['iPad mini', 'USB-C Power Adapter', 'Lightning to USB-C Cable'],
         orderInfo: {
-        	inStock: 77, // кол-во едениц товара в наличии
-        	reviews: 85, // процент положительных отзывов
+            inStock: 77, // кол-во едениц товара в наличии
+            reviews: 85, // процент положительных отзывов
         }
     },
     {
-        id: 13 ,
+        id: 13,
         category: 'Watch',
         imgUrl: 'items/apple-watch-series-6.png',
         name: 'Apple Watch Series 6',
         display: 1.73228, // дюймы
-        color: [ 'Silver', 'Space Grey','Gold','Blue','Graphite'],
+        color: ['Silver', 'Space Grey', 'Gold', 'Blue', 'Graphite'],
         price: 399, // доллары
         chip: {
             name: 'S6 SiP   ',
@@ -524,20 +523,20 @@ const items = [
             depth: '0.6', // cm
             weight: '1.07', // Кг
         },
-        os: 'macOS',
+        os: 'Watch OS',
         InTheBox: ['Case', 'Solo Loop', '1m Magnetic Charging Cable'],
         orderInfo: {
-        	inStock: 90, // кол-во едениц товара в наличии
-        	reviews: 458, // процент положительных отзывов
+            inStock: 90, // кол-во едениц товара в наличии
+            reviews: 458, // процент положительных отзывов
         }
     },
     {
-        id: 14 ,
+        id: 14,
         category: 'Watch',
         imgUrl: 'items/apple-watch-se.jpg',
         name: 'Apple Watch Series SE',
         display: 1.73228, // дюймы
-        color: [ 'Silver', 'Space Grey','Gold','Blue','Graphite'],
+        color: ['Silver', 'Space Grey', 'Gold', 'Blue', 'Graphite'],
         price: 309, // доллары
         chip: {
             name: 'S5 SiP   ',
@@ -562,20 +561,20 @@ const items = [
             depth: '0.6', // cm
             weight: '1.07', // Кг
         },
-        os: 'macOS',
+        os: 'Watch OS',
         InTheBox: ['Case', 'Band (can be configured for either S/M or M/L length)', '1m Magnetic Charging Cable'],
         orderInfo: {
-        	inStock: 79, // кол-во едениц товара в наличии
-        	reviews: 69, // процент положительных отзывов
+            inStock: 79, // кол-во едениц товара в наличии
+            reviews: 69, // процент положительных отзывов
         }
     },
     {
-        id: 15 ,
+        id: 15,
         category: 'Watch',
         imgUrl: 'items/apple-watch3.jpg',
         name: 'Apple Watch Series 3',
-        display: 22.1654 ,// дюймы
-        color: [ 'Silver', 'Space Grey','Gold','Blue','Graphite'],
+        display: 22.1654, // дюймы
+        color: ['Silver', 'Space Grey', 'Gold', 'Blue', 'Graphite'],
         price: 309, // доллары
         chip: {
             name: 'S5 SiP   ',
@@ -600,11 +599,11 @@ const items = [
             depth: '0.6', // cm
             weight: '1.07', // Кг
         },
-        os: 'macOS',
+        os: 'Watch OS',
         InTheBox: ['Case', 'Band (can be configured for either S/M or M/L length)', '1m Magnetic Charging Cable'],
         orderInfo: {
-        	inStock: 47, // кол-во едениц товара в наличии
-        	reviews: 93, // процент положительных отзывов
+            inStock: 47, // кол-во едениц товара в наличии
+            reviews: 93, // процент положительных отзывов
         }
     },
     {
@@ -641,8 +640,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 73, // кол-во едениц товара в наличии
-        	reviews: 12, // процент положительных отзывов
+            inStock: 73, // кол-во едениц товара в наличии
+            reviews: 12, // процент положительных отзывов
         }
     },
     {
@@ -679,8 +678,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 0, // кол-во едениц товара в наличии
-        	reviews: 73, // процент положительных отзывов
+            inStock: 0, // кол-во едениц товара в наличии
+            reviews: 73, // процент положительных отзывов
         }
     },
     {
@@ -717,8 +716,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 43, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 43, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -755,8 +754,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 84, // кол-во едениц товара в наличии
-        	reviews: 99, // процент положительных отзывов
+            inStock: 84, // кол-во едениц товара в наличии
+            reviews: 99, // процент положительных отзывов
         }
     },
     {
@@ -793,8 +792,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 2, // кол-во едениц товара в наличии
-        	reviews: 99, // процент положительных отзывов
+            inStock: 2, // кол-во едениц товара в наличии
+            reviews: 99, // процент положительных отзывов
         }
     },
     {
@@ -831,8 +830,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 5, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 5, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -869,8 +868,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 81, // кол-во едениц товара в наличии
-        	reviews: 73, // процент положительных отзывов
+            inStock: 81, // кол-во едениц товара в наличии
+            reviews: 73, // процент положительных отзывов
         }
     },
     {
@@ -907,8 +906,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 98, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 98, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -945,8 +944,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 115, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 115, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -983,8 +982,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 0, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 0, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -1021,8 +1020,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 14', 'USB-C to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 23, // кол-во едениц товара в наличии
-        	reviews: 86, // процент положительных отзывов
+            inStock: 23, // кол-во едениц товара в наличии
+            reviews: 86, // процент положительных отзывов
         }
     },
     {
@@ -1059,8 +1058,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 12', 'USB-A to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 34, // кол-во едениц товара в наличии
-        	reviews: 94, // процент положительных отзывов
+            inStock: 34, // кол-во едениц товара в наличии
+            reviews: 94, // процент положительных отзывов
         }
     },
     {
@@ -1097,8 +1096,8 @@ const items = [
         os: 'IOS',
         InTheBox: ['iPhone with iOS 12', 'USB-A to Lightning Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 0, // кол-во едениц товара в наличии
-        	reviews: 94, // процент положительных отзывов
+            inStock: 0, // кол-во едениц товара в наличии
+            reviews: 94, // процент положительных отзывов
         }
     },
     {
@@ -1129,8 +1128,8 @@ const items = [
         os: 'tvOS',
         InTheBox: ['Apple TV 4K', 'Siri Remote', 'Power cord', 'Lightning to USB cable', 'Documentation'],
         orderInfo: {
-        	inStock: 2, // кол-во едениц товара в наличии
-        	reviews: 99, // процент положительных отзывов
+            inStock: 2, // кол-во едениц товара в наличии
+            reviews: 99, // процент положительных отзывов
         }
     },
     {
@@ -1161,8 +1160,8 @@ const items = [
         os: 'tvOS',
         InTheBox: ['Apple TV 4K', 'Siri Remote', 'Power cord', 'Lightning to USB cable', 'Documentation'],
         orderInfo: {
-        	inStock: 1, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 1, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -1196,8 +1195,8 @@ const items = [
         os: null,
         InTheBox: ['AirPods', 'Wireless Charging Case', 'Lightning to USB-A Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 23, // кол-во едениц товара в наличии
-        	reviews: 100, // процент положительных отзывов
+            inStock: 23, // кол-во едениц товара в наличии
+            reviews: 100, // процент положительных отзывов
         }
     },
     {
@@ -1231,8 +1230,8 @@ const items = [
         os: null,
         InTheBox: ['AirPods Pro', 'Wireless Charging Case', 'Lightning to USB-C Cable', 'Documentation', 'Silicone ear tips (three sizes)'],
         orderInfo: {
-        	inStock: 29, // кол-во едениц товара в наличии
-        	reviews: 94, // процент положительных отзывов
+            inStock: 29, // кол-во едениц товара в наличии
+            reviews: 94, // процент положительных отзывов
         }
     },
     {
@@ -1266,8 +1265,8 @@ const items = [
         os: null,
         InTheBox: ['AirPods MAx', 'Smart Case', 'Lightning to USB-C Cable', 'Documentation'],
         orderInfo: {
-        	inStock: 0, // кол-во едениц товара в наличии
-        	reviews: 5, // процент положительных отзывов
+            inStock: 0, // кол-во едениц товара в наличии
+            reviews: 5, // процент положительных отзывов
         }
     },
 ];
